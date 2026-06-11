@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nusantara Eats — Pesan Makanan Lezat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== PROMO BAR ===== -->
+<div class="promo-bar">
+  🎉 Gratis ongkir untuk pesanan pertama! Gunakan kode
+  <code>PERTAMA</code>
+  · Berlaku hari ini saja
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <a href="#" class="nav-logo">
+    <span>🍜</span> Nusantara Eats
+  </a>
+
+  <div class="nav-search">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Cari makanan favoritmu…" autocomplete="off" />
+  </div>
+
+  <div class="nav-actions">
+    <button class="nav-btn nav-btn-ghost" onclick="showToast('Fitur login segera hadir!', 'ℹ️')">Masuk</button>
+    <button class="nav-btn nav-btn-primary" onclick="showToast('Fitur daftar segera hadir!', 'ℹ️')">Daftar</button>
+    <button class="cart-btn" id="cartToggle">
+      🛒 Keranjang <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">⚡ Pengiriman 30 menit</div>
+    <h1>Cita Rasa <em>Nusantara</em> di Tanganmu</h1>
+    <p>Ratusan menu lezat dari restoran terbaik kota — dikirim langsung ke pintu rumahmu, segar dan hangat.</p>
+    <div class="hero-cta">
+      <button class="btn-hero-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">🍽 Pesan Sekarang</button>
+      <button class="btn-hero-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">Lihat Cara Kerja</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>200+</strong><span>Menu Pilihan</span></div>
+      <div class="hero-stat"><strong>50+</strong><span>Restoran Mitra</span></div>
+      <div class="hero-stat"><strong>4.9★</strong><span>Rating Rata-rata</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-card-emoji">🍛</div>
+      <div class="hero-card-title">Nasi Rendang Special</div>
+      <div class="hero-card-sub">Restoran Padang Jaya · ★ 4.9</div>
+      <div class="hero-card-price">
+        <strong>Rp 32.000</strong>
+        <button class="hero-card-btn">+ Tambah</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATEGORIES ===== -->
+<div class="section" style="padding-bottom: 0;">
+  <div class="categories-scroll" id="categoryFilter">
+    <button class="cat-pill active" data-cat="semua"><span class="cat-emoji">🍽</span> Semua</button>
+    <button class="cat-pill" data-cat="nasi"><span class="cat-emoji">🍚</span> Nasi</button>
+    <button class="cat-pill" data-cat="mie"><span class="cat-emoji">🍜</span> Mie & Bakso</button>
+    <button class="cat-pill" data-cat="ayam"><span class="cat-emoji">🍗</span> Ayam</button>
+    <button class="cat-pill" data-cat="seafood"><span class="cat-emoji">🦐</span> Seafood</button>
+    <button class="cat-pill" data-cat="vegetarian"><span class="cat-emoji">🥗</span> Vegetarian</button>
+    <button class="cat-pill" data-cat="minuman"><span class="cat-emoji">🥤</span> Minuman</button>
+    <button class="cat-pill" data-cat="dessert"><span class="cat-emoji">🍰</span> Dessert</button>
+    <button class="cat-pill" data-cat="snack"><span class="cat-emoji">🍟</span> Snack</button>
+  </div>
+</div>
+
+<!-- ===== MENU ===== -->
+<section class="section" id="menu">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Menu Kami</div>
+      <h2>Pilihan Makanan Terbaik</h2>
+    </div>
+    <a href="#" class="see-all">Lihat semua →</a>
+  </div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- ===== SPECIAL OFFERS ===== -->
+<div class="offers-section" style="padding: clamp(2rem,5vw,4rem) 0;">
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">Penawaran Spesial</div>
+        <h2>Promo & Diskon Hari Ini</h2>
+      </div>
+    </div>
+    <div class="offers-grid">
+      <div class="offer-card offer-card-1" onclick="applyPromo('HEMAT20')">
+        <span class="offer-emoji">🎊</span>
+        <div>
+          <h3>Diskon 20%</h3>
+          <p>Untuk semua menu utama setiap hari Jumat</p>
+          <span class="offer-code">HEMAT20</span>
+        </div>
+      </div>
+      <div class="offer-card offer-card-2" onclick="applyPromo('GRATIS')">
+        <span class="offer-emoji">🚴</span>
+        <div>
+          <h3>Gratis Ongkir</h3>
+          <p>Minimum belanja Rp 50.000 untuk area dalam kota</p>
+          <span class="offer-code">GRATIS</span>
+        </div>
+      </div>
+      <div class="offer-card offer-card-3" onclick="applyPromo('BELI2')">
+        <span class="offer-emoji">🍱</span>
+        <div>
+          <h3>Beli 2 Hemat 15%</h3>
+          <p>Tambah 2 menu apapun dan dapatkan potongan harga</p>
+          <span class="offer-code">BELI2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section" id="how">
+  <div class="section-header text-center" style="flex-direction: column; align-items: center;">
+    <div class="section-eyebrow">Cara Pesan</div>
+    <h2>Mudah & Cepat dalam 4 Langkah</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-icon">🔍</div>
+      <h3>Pilih Menu</h3>
+      <p>Telusuri ratusan menu lezat dari berbagai restoran pilihan kami</p>
+    </div>
+    <div class="how-step">
+      <div class="how-icon">🛒</div>
+      <h3>Tambah Keranjang</h3>
+      <p>Tambahkan menu favorit ke keranjang dan atur jumlah pesananmu</p>
+    </div>
+    <div class="how-step">
+      <div class="how-icon">💳</div>
+      <h3>Bayar Mudah</h3>
+      <p>Pilih metode pembayaran favoritmu — transfer, e-wallet, atau COD</p>
+    </div>
+    <div class="how-step">
+      <div class="how-icon">🚀</div>
+      <h3>Terima Pesanan</h3>
+      <p>Pesananmu dikirim oleh kurir kami dan tiba dalam 30 menit</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CART SIDEBAR ===== -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-head">
+    <h2>🛒 Keranjang Belanja</h2>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <!-- dinamis -->
+  </div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-coupon">
+      <input class="coupon-input" id="couponInput" type="text" placeholder="Kode promo…" />
+      <button class="coupon-btn" onclick="redeemCoupon()">Pakai</button>
+    </div>
+    <div class="cart-totals" id="cartTotals"></div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()">Lanjut Pembayaran →</button>
+  </div>
+</div>
+
+<!-- ===== CHECKOUT MODAL ===== -->
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal" id="checkoutModal">
+    <div class="modal-head">
+      <h2>🧾 Form Pemesanan</h2>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Alamat -->
+      <div class="form-section">
+        <h3>📍 Alamat Pengiriman</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" id="f_name" placeholder="Budi Santoso" />
+          </div>
+          <div class="form-group">
+            <label>No. Telepon</label>
+            <input type="tel" id="f_phone" placeholder="08xx-xxxx-xxxx" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Alamat Lengkap</label>
+          <input type="text" id="f_address" placeholder="Jl. Merdeka No. 17, RT 03/04" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Kecamatan / Kota</label>
+            <input type="text" id="f_city" placeholder="Bandung" />
+          </div>
+          <div class="form-group">
+            <label>Kode Pos</label>
+            <input type="text" id="f_zip" placeholder="40132" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Catatan untuk Kurir</label>
+          <textarea id="f_note" placeholder="Pagar besi, cincin 2x sebelum masuk…"></textarea>
+        </div>
+      </div>
+
+      <!-- Waktu Pengiriman -->
+      <div class="form-section">
+        <h3>🕐 Waktu Pengiriman</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Jadwal Pengiriman</label>
+            <select id="f_schedule">
+              <option value="sekarang">Sekarang (± 30 menit)</option>
+              <option value="1jam">Dalam 1 jam</option>
+              <option value="2jam">Dalam 2 jam</option>
+              <option value="terjadwal">Pilih waktu</option>
+            </select>
+          </div>
+          <div class="form-group" id="scheduleTimeGroup" style="display:none">
+            <label>Waktu Pengiriman</label>
+            <input type="time" id="f_time" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Pembayaran -->
+      <div class="form-section">
+        <h3>💳 Metode Pembayaran</h3>
+        <div class="payment-methods" id="paymentMethods">
+          <div class="pay-method active" data-pay="gopay" onclick="selectPayment(this)">
+            <span class="pay-icon">💚</span><span>GoPay</span>
+          </div>
+          <div class="pay-method" data-pay="ovo" onclick="selectPayment(this)">
+            <span class="pay-icon">💜</span><span>OVO</span>
+          </div>
+          <div class="pay-method" data-pay="dana" onclick="selectPayment(this)">
+            <span class="pay-icon">🔵</span><span>DANA</span>
+          </div>
+          <div class="pay-method" data-pay="transfer" onclick="selectPayment(this)">
+            <span class="pay-icon">🏦</span><span>Transfer Bank</span>
+          </div>
+          <div class="pay-method" data-pay="cc" onclick="selectPayment(this)">
+            <span class="pay-icon">💳</span><span>Kartu Kredit</span>
+          </div>
+          <div class="pay-method" data-pay="cod" onclick="selectPayment(this)">
+            <span class="pay-icon">💵</span><span>COD</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ringkasan -->
+      <div class="modal-order-summary">
+        <h4>Ringkasan Pesanan</h4>
+        <div id="modalSummaryItems"></div>
+        <div id="modalSummaryTotals"></div>
+      </div>
+
+      <button class="place-order-btn" onclick="placeOrder()">🚀 Pesan Sekarang</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SUCCESS MODAL ===== -->
+<div class="modal-overlay" id="successOverlay">
+  <div class="modal" id="successModal">
+    <div class="modal-body">
+      <div class="success-modal">
+        <div class="success-anim">🎉</div>
+        <h2>Pesanan Dikonfirmasi!</h2>
+        <p>Terima kasih sudah memesan di Nusantara Eats.<br>Pesananmu sedang disiapkan oleh restoran.</p>
+        <div class="order-id" id="orderIdDisplay">#NE-00000</div>
+        <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.5rem;">Perkiraan tiba dalam <strong>25–35 menit</strong></p>
+        <button class="track-btn" onclick="closeSuccess()">Lihat Status Pesanan →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <span>🍜</span> Nusantara Eats
+      </div>
+      <p>Platform pesan antar makanan terpercaya dengan ratusan menu lezat siap dikirim ke rumahmu.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="#">Nasi & Lauk</a></li>
+        <li><a href="#">Mie & Sop</a></li>
+        <li><a href="#">Ayam Goreng</a></li>
+        <li><a href="#">Seafood</a></li>
+        <li><a href="#">Minuman Segar</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Layanan</h4>
+      <ul>
+        <li><a href="#">Cara Pesan</a></li>
+        <li><a href="#">Lacak Pesanan</a></li>
+        <li><a href="#">Program Loyalitas</a></li>
+        <li><a href="#">Daftar Mitra</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Bantuan</h4>
+      <ul>
+        <li><a href="#">Pusat Bantuan</a></li>
+        <li><a href="#">Hubungi Kami</a></li>
+        <li><a href="#">Kebijakan Privasi</a></li>
+        <li><a href="#">Syarat & Ketentuan</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Nusantara Eats. Dibuat dengan ❤️ untuk pecinta kuliner Indonesia.</span>
+    <span>🇮🇩 Made in Indonesia</span>
+  </div>
+</footer>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ===== SCRIPT ===== -->
+<script src="app.js"></script>
+</body>
+</html>
